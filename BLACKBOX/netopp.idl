@@ -1,0 +1,11 @@
+module NetOpp {
+  typedef sequence<string> StringArray;
+  interface NetOppServer {
+    boolean startNetwork();
+    boolean stopNetwork();
+    boolean addFile(in string file);
+    boolean delFile(in string file);
+    StringArray clientList();
+    StringArray fileList();
+  };
+};
