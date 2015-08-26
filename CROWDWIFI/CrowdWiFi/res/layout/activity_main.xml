@@ -8,17 +8,24 @@
 		android:layout_height="wrap_content"/>
 
 	<EditText android:id="@+id/firstValue" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:hint="Enter a numeric value"/>
-
-	<EditText android:id="@+id/secondValue" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:hint="Enter a numeric value"/>
+		android:layout_height="wrap_content" android:hint="Entre com o nome do Arquivo"/>
 
 	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-		 android:weightSum="3">
+		 android:weightSum="2">
 
 	<Button android:id="@+id/add" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="Add" android:layout_weight="1"/>
+		android:layout_height="wrap_content" android:text="AddFile" android:layout_weight="1"/>
+	<Button android:id="@+id/dell" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="delFile" android:layout_weight="1"/>
+	</LinearLayout>
 	
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+		 android:weightSum="2">
+
+	<Button android:id="@+id/start" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="StartNetwork" android:layout_weight="1"/>
+	<Button android:id="@+id/stop" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="StopNetwork" android:layout_weight="1"/>
 	</LinearLayout>
 
 	</LinearLayout>
