@@ -11,13 +11,13 @@ def trata_cliente(conexao, endereco):
     requisicao = conexao.recv(1024)
     print requisicao
     if requisicao == 'LIST':
-        arqs = os.listdir('/etc/black/arquivos/')
+        arqs = os.listdir('/BLACKBOX/NetOpp/files/')
         conexao.send(json.dumps(arqs))
     elif requisicao == 'GET':
-        arqs = os.listdir('/etc/black/arquivos/')
+        arqs = os.listdir('/BLACKBOX/NetOpp/files/')
         arquivo = conexao.recv(1024)
         if arquivo in arqs:
-            fp = open('/etc/black/arquivos/{0}'.format(arquivo), 'r')
+            fp = open('/BLACKBOX/NetOpp/files/{0}'.format(arquivo), 'r')
             strng = fp.read(1024)
             while strng:
                 conexao.send(strng)
@@ -26,13 +26,13 @@ def trata_cliente(conexao, endereco):
             logger.error('[ENVIADO - {0}]'.format(arquivo))
     elif requisicao == 'PUT':
         conexao.send('OK')
-        arqs = os.listdir('/etc/black/arquivos/')
+        arqs = os.listdir('/BLACKBOX/NetOpp/files/')
         arquivo = conexao.recv(1024)
         print arquivo
         print arqs
         if arquivo not in arqs:
             conexao.send('TRUE')
-            arq = open('/etc/black/arquivos/{0}'.format(arquivo), 'w')
+            arq = open('/BLACKBOX/NetOpp/files/{0}'.format(arquivo), 'w')
             while 1:
                 dados = conexao.recv(1024)
                 if not dados:
@@ -68,7 +68,7 @@ def loop_servidor():
 
 if __name__ == '__main__':
     logger = logging.getLogger('myapp')
-    hdlr = logging.FileHandler('/root/Net-Opp/servidor.log')
+    hdlr = logging.FileHandler('/BLACKBOX/Net-Opp/log/servidor.log')
     formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
     hdlr.setFormatter(formatter)
     logger.addHandler(hdlr)

@@ -19,7 +19,7 @@ def put_file(arq):
     env = soquete.recv(1024)
     print env
     if env == 'TRUE':
-        fp = open('/etc/black/arquivos/{0}'.format(arq), 'r')
+        fp = open('/BLACKBOX/NetOpp/files/{0}'.format(arq), 'r')
         strng = fp.read(1024)
         while strng:
             soquete.send(strng)
@@ -33,7 +33,7 @@ def get_file(arq):
     soquete = conectar()
     soquete.send('GET')
     soquete.send(arq)
-    arquivo = open('/etc/black/arquivos/{0}'.format(arq), 'w')
+    arquivo = open('/BLACKBOX/NetOpp/files/{0}'.format(arq), 'w')
     while 1:
         dados = soquete.recv(1024)
         if not dados:
@@ -45,7 +45,7 @@ def get_file(arq):
     logger.error('[RECEBIDO - {0}]'.format(arq))
 
 logger = logging.getLogger('myapp')
-hdlr = logging.FileHandler('/root/Net-Opp/cliente.log')
+hdlr = logging.FileHandler('/BLACKBOX/Net-Opp/log/cliente.log')
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 hdlr.setFormatter(formatter)
 logger.addHandler(hdlr) 
@@ -57,7 +57,7 @@ while True:
     soquete.send('LIST')
     arqs = json.loads(soquete.recv(1014))
     soquete.close()
-    ass = os.listdir('/etc/black/arquivos/')
+    ass = os.listdir('/BLACKBOX/Net-Opp/files/')
     for i in arqs:
         if i not in ass:
             Thread(target=get_file, args=(i, )).start()
@@ -70,7 +70,7 @@ while True:
         else:
             nada = nada - 1
     if nada <= 5:
-        fil = open('/etc/black/nada.txt', 'w')
+        fil = open('/BLACKBOX/Net-Opp/config/nada.txt', 'w')
         fil.write('1')
         fil.close()
     time.sleep(5)

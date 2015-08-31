@@ -4,7 +4,7 @@ import sys, os
 import CORBA, NetOpp, NetOpp__POA
 from configobj import ConfigObj
 
-config = ConfigObj('/etc/blackbox/carro/config.properties')
+config = ConfigObj('/BLACKBOX/NetOpp/config/config.properties')
 vd = config.get('videosDirectory')
 pl = config.get('pathLog')
 
@@ -12,14 +12,14 @@ class NetOppServer(NetOpp__POA.NetOppServer):
 
 	def startNetwork(self):
 		try:
-			os.system('/root/Net-Opp/init.sh')
+			os.system('/BLACKBOX/NetOpp/init/init.sh')
 			return True
 		except:
 			return False
 
 	def stopNetwork(self):
 		try:
-			os.system('/root/Net-Opp/kill-init.sh')
+			os.system('/BLACKBOX/NetOpp/init/init.sh')
 			return True
 		except:
 			return False
@@ -48,7 +48,7 @@ class NetOppServer(NetOpp__POA.NetOppServer):
 
 	def clientList(self):
 		try:
-			lines = open('/root/Net-Opp/clients.txt', "r").readlines()
+			lines = open('/BLACKBOX/NetOpp/config/clients.txt', "r").readlines()
 			return lines
 		except:
 			return None
@@ -66,7 +66,7 @@ poa = orb.resolve_initial_references("RootPOA")
 servant = NetOppServer()
 poa.activate_object(servant)
 
-a = open(os.getcwd() + '/IOR.txt', 'w')
+a = open(os.getcwd() + '/BLACKBOX/NetOpp/config/IOR.txt', 'w')
 a.write(orb.object_to_string(servant._this()))
 a.close()
 

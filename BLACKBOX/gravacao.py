@@ -6,14 +6,14 @@ from configobj import ConfigObj
 import CORBA, NetOpp
 import os
 
-config = ConfigObj('/etc/blackbox/carro/config.properties')
+config = ConfigObj('/BLACKBOX/NetOpp/config/config.properties')
 vd = config.get('videosDirectory')
 vt = config.get('videosTime')
 pl = config.get('pathLog')
 vt = 20
 
 def addFinal(pathLog, nameVideo):
-    ior = open(os.getcwd() + '/IOR.txt').read()
+    ior = open(os.getcwd() + '/BLACKBOX/NetOpp/config/IOR.txt').read()
     orb = CORBA.ORB_init()
     servant = orb.string_to_object(ior)
     servant._narrow(NetOpp.NetOppServer)

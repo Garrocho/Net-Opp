@@ -2,7 +2,7 @@ import os
 import psutil
 from configobj import ConfigObj
 
-config = ConfigObj('/etc/blackbox/carro/config.properties')
+config = ConfigObj('/BLACKBOX/NetOpp/config/config.properties')
 vd = config.get('videosDirectory')
 pathLog = config.get('pathLog')
 du = int(config.get('diskUsage'))
