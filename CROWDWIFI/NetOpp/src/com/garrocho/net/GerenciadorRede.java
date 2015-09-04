@@ -39,7 +39,7 @@ public class GerenciadorRede extends AsyncTask<Void, String, Void> {
 	public Context contexto;
 	private int cont_wifi = 0;
 	private Handler myHandler;
-	private int cont_server = 0;
+	public int cont_server = 0;
 	public String pasta = Environment.getExternalStorageDirectory() + "/NetOpp";
 	public boolean iClient, iServer;
 	public boolean fuiServer = false;

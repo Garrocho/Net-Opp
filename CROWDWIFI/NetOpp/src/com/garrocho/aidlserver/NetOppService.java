@@ -16,6 +16,7 @@ public class NetOppService extends Service {
 
 	public GerenciadorRede gerenciadorRede;
 	public ProvedorConteudos provedorConteudos;
+	public boolean start = false;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -33,6 +34,7 @@ public class NetOppService extends Service {
 				
 				gerenciadorRede = new GerenciadorRede(MainActivity.getAppContext());
 				gerenciadorRede.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				start = true;
 				return true;
 			} catch (Exception e) {
 				return false; 
@@ -84,6 +86,19 @@ public class NetOppService extends Service {
 				return gerenciadorRede.fileList;				
 			} catch (Exception e) {
 				return null; 
+			}
+		}
+		
+		@Override
+		public boolean addTradeOff(int tradeoff) throws RemoteException {
+			try {
+				if (start) {
+					gerenciadorRede.cont_server = (int)(55 - (int)(tradeoff / 2))/2;
+					return true;
+				}
+				return false;
+			} catch (Exception e) {
+				return false;
 			}
 		}
 	};

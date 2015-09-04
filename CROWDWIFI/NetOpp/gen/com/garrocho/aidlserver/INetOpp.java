@@ -78,6 +78,16 @@ reply.writeNoException();
 reply.writeInt(((_result)?(1):(0)));
 return true;
 }
+case TRANSACTION_addTradeOff:
+{
+data.enforceInterface(DESCRIPTOR);
+int _arg0;
+_arg0 = data.readInt();
+boolean _result = this.addTradeOff(_arg0);
+reply.writeNoException();
+reply.writeInt(((_result)?(1):(0)));
+return true;
+}
 case TRANSACTION_clientList:
 {
 data.enforceInterface(DESCRIPTOR);
@@ -182,6 +192,24 @@ _data.recycle();
 }
 return _result;
 }
+@Override public boolean addTradeOff(int tradeoff) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+boolean _result;
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeInt(tradeoff);
+mRemote.transact(Stub.TRANSACTION_addTradeOff, _data, _reply, 0);
+_reply.readException();
+_result = (0!=_reply.readInt());
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+return _result;
+}
 @Override public java.util.List<java.lang.String> clientList() throws android.os.RemoteException
 {
 android.os.Parcel _data = android.os.Parcel.obtain();
@@ -221,13 +249,15 @@ static final int TRANSACTION_startNetwork = (android.os.IBinder.FIRST_CALL_TRANS
 static final int TRANSACTION_stopNetwork = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
 static final int TRANSACTION_addFile = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
 static final int TRANSACTION_delFile = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
-static final int TRANSACTION_clientList = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
-static final int TRANSACTION_fileList = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
+static final int TRANSACTION_addTradeOff = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+static final int TRANSACTION_clientList = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
+static final int TRANSACTION_fileList = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
 }
 public boolean startNetwork() throws android.os.RemoteException;
 public boolean stopNetwork() throws android.os.RemoteException;
 public boolean addFile(java.lang.String file) throws android.os.RemoteException;
 public boolean delFile(java.lang.String file) throws android.os.RemoteException;
+public boolean addTradeOff(int tradeoff) throws android.os.RemoteException;
 public java.util.List<java.lang.String> clientList() throws android.os.RemoteException;
 public java.util.List<java.lang.String> fileList() throws android.os.RemoteException;
 }
